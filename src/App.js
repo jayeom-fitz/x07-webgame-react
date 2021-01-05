@@ -1,13 +1,29 @@
+import React from 'react';
+
 import Gugudan from './Gugudan';
 import LikeButton from './LikeButton';
 
-function App() {
-  return (
-    <>
-      <LikeButton /> <br />
-      <Gugudan />
-    </>
-  );
-}
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value : 0,
+    }
+  }
 
-export default App;
+  render() {
+    return (
+      <>
+        <div>
+          <button onClick={() => {this.setState({value : 0})}} >LikeButton</button>
+          <button onClick={() => {this.setState({value : 1})}} >Gugudan</button>
+        </div>
+        {this.state.value === 0 ? 
+          <LikeButton /> 
+          : 
+          <Gugudan />
+        }       
+      </>
+    );
+  }
+}

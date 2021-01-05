@@ -1,54 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default class Gugudan extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      num : [Math.ceil(Math.random() * 9), 
-             Math.ceil(Math.random() * 9)],
-      score : 0,
-      value : '',
-      result : '',
-    }      
-  }
+export default function Gugudan() {
+  const [nums, setNums] = useState([Math.ceil(Math.random() * 9), Math.ceil(Math.random() * 9)]);
+  const [score, setScore] = useState(0);
+  const [value, setValue] = useState('');
+  const [result, setResult] = useState('');
 
-  onSubmit = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    const answer = this.state.num[0] * this.state.num[1];
-    const myAns = parseInt(this.state.value);
-    let result = '';
-    let score = 0;
+    const answer = nums[0] * nums[1];
+    const myAns = parseInt(value);
     if(answer === myAns) {
-      result = '정답입니다. 답은 '+answer+' 입니다.'; score = 10;
+      setResult('정답입니다. 답은 '+answer+' 입니다.');
+      setScore(score + 10);
     } else {
-      result = '틀렸습니다. 답은 '+answer+' 입니다.'; score = -5;
+      setResult('틀렸습니다. 답은 '+answer+' 입니다.');
+      setScore(score - 5);
     }
-    this.setState({
-      num : [Math.ceil(Math.random() * 9), 
-             Math.ceil(Math.random() * 9)],
-      score : this.state.score + score,
-      value : '',
-      result : result,
-    });
+    setNums([Math.ceil(Math.random() * 9), Math.ceil(Math.random() * 9)]);
+    setValue('');
   };
 
-  onChange = (event) => {
-    this.setState({ 
-      value : event.target.value,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        SCORE : {this.state.score}<br/>
-        {this.state.num[0]} * {this.state.num[1]} = ?<br/>
-        <form onSubmit={this.onSubmit}>
-          <input type="number" value={this.state.value} onChange={this.onChange}/>
-          <button>input</button>
-        </form>
-        {this.state.result}
-      </div>
-    );
-  }
-}
+  const onChange = (event) => setValue(event.target.value);
+ 
+  return (
+    <div>
+      SCORE : {score}<br/>
+      {nums[0]} * {nums[1]} = ?<br/>
+      <form onSubmit={onSubmit}>
+        <input type="number" value={value} onChange={onChange}/>
+        <button>input</button>
+      </form>
+      {result}
+    </div>
+  );
+};

@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Gugudan from './Gugudan';
 import LikeButton from './LikeButton';
+import Gugudan from './Gugudan';
+import WordRelay from './WordRelay';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,11 +18,13 @@ export default class App extends React.Component {
         <div>
           <button onClick={() => {this.setState({value : 0})}} >LikeButton</button>
           <button onClick={() => {this.setState({value : 1})}} >Gugudan</button>
+          <button onClick={() => {this.setState({value : 2})}} >WordRelay</button>
         </div>
         {this.state.value === 0 ? 
           <LikeButton /> 
-          : 
-          <Gugudan />
+          : (this.state.value === 1 ?
+            <Gugudan /> : <WordRelay />
+          )
         }       
       </>
     );

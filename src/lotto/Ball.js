@@ -10,7 +10,16 @@ const Ball = ({number}) => {
   else  background = 'green';
 
   return (
-    <div className={number} style={{background}}>{number}</div>
+    <div style={{
+      background, width:"50px", height:"50px", 
+      borderRadius:"50%", float:'left',
+      marginRight:"10px"}}>
+        <div style={{
+          width:"100%", paddingTop:"13px", 
+          textAlign:"center"}}>
+          {number}
+        </div>
+    </div>
   );
 };
 

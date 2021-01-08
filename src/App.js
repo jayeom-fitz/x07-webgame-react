@@ -6,6 +6,7 @@ import WordRelay from './WordRelay';
 import NumberBaseball from './NumberBaseball';
 import ReactionTimeCheck from './ReactionTimeCheck';
 import RockPaperScissor from './RockPaperScissor';
+import Lotto from './lotto/Lotto';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -25,13 +26,16 @@ export default class App extends React.Component {
           <button onClick={() => {this.setState({value : 3})}} >NumberBaseball</button>
           <button onClick={() => {this.setState({value : 4})}} >ReactionTimeCheck</button>
           <button onClick={() => {this.setState({value : 5})}} >RockPaperScissor</button>
+          <button onClick={() => {this.setState({value : 6})}} >Lotto</button>
         </div>
         {this.state.value === 0 ? 
           <LikeButton /> : (this.state.value === 1 ?
             <Gugudan /> : (this.state.value === 2 ?
               <WordRelay /> : (this.state.value === 3 ?
                 <NumberBaseball /> : (this.state.value === 4 ?
-                  <ReactionTimeCheck /> : <RockPaperScissor /> 
+                  <ReactionTimeCheck /> : (this.state.value === 5 ?
+                    <RockPaperScissor /> : <Lotto /> 
+                  )
                 )
               )              
             )
